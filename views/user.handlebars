@@ -1,0 +1,84 @@
+<a href="/">Home</a>
+<p>ID: {{id}}
+<p>Name: {{name}}
+<p>Email: {{email}}
+<p>Created in ZD: {{created_at}}
+<p>ZD Tickets: {{tickets.count}}
+<p>Zoom User: 
+
+  {{#if zoom.zoom_user}}
+    {{zoom.zoom_user}}
+  {{else}}
+      no <button> Make Zoom User </button> 
+  {{/if}}
+
+
+{{#if zoom.zoom_user}}
+
+  <h1> Meetings </h1>
+
+  <table border="1px black solid">
+    <thead>
+      <th>Meeting Topic</th>
+      <th>ID</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Duration</th>
+      <th>Create Ticket</th>
+    </thead>
+    <tbody>
+      {{#each zoom.meetings}}
+        <tr>
+          
+          <td>{{this.topic}}</td>
+          <td>{{this.id}}</td>
+          <td>{{this.start_time}}</td>
+          <td>{{this.end_time}}
+          <td>{{this.duration}}</td>
+          <td> 
+                <form method='post' action='/createZdTicket'>
+                  <input type ="hidden" name="ZdId" value="{{../id}}">
+                  <input type ="hidden" name="ZdEmail" value="{{../email}}">
+                  <input type ="hidden" name="ZdName" value="{{../name}}">
+                  <input type ="hidden" name="topic" value="{{this.topic}}">
+                  <input type ="hidden" name="meeting_id" value="{{this.id}}">
+                  <input type ="hidden" name="meeting_uuid" value="{{this.uuid}}">
+                  <input type ="hidden" name="start_time" value="{{this.start_time}}">
+                  <button type="submit">New Ticket</button>
+                </form>
+
+
+
+          </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+{{/if}}
+
+<h1> Tickets </h1>
+
+<!-- get zendesk tickets -->
+{{#if tickets.count}}
+  <table border="1px black solid">
+    <thead>
+      <th>ID </th>
+      <th>Subject</th>
+      <th>Created Time</th>
+      <th>Description</th>
+
+    </thead>
+    <tbody>
+      {{#each tickets.tickets}}
+        <tr>
+          <td>{{this.id}}</td>
+          <td>{{this.subject}}</td>
+          <td>{{this.created_at}}</td>
+          <td>{{this.description}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+{{/if}}

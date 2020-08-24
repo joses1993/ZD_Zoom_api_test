@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	<label> New User </label>
+      <form class="form-inline my-2 my-lg-0">
+        <input type = "email" name="newUserEmail" placeholder="Email"><br>
+        <input type = "text" name="newUserFname" placeholder="First Name"><br>
+        <input type = "text" name="newUserLname" placeholder="Last Name"><br>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+
+      <br>
+
+      <table border="1px black solid">
+      	<thead>
+      		<th>email</th>
+      		<th>First Name</th>
+      		<th>Last Name</th>
+      	</thead>
+      	<tbody>
+      		{{#each results}}
+	      		<td>{{this.email}}</td>
+	      		<td>{{this.First_Name}}</td>
+	      		<td>{{this.Last_Name}}</td>
+      		{{/each}}
+      	</tbody>
+      </table>
+</body>
+</html>
